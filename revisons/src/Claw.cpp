@@ -14,8 +14,21 @@ y = theHero->y + theHero->height / 2 - height/2;
 }
 void Claw::Move()
 {
-	x = theHero->x + theHero->width;
+	if(clawReleaced=true)
+	{
+		x = x + speedX * ofGetLastFrameTime() * 50;
+	}
 	y = theHero->y + theHero->height / 2 - height / 2;
+
+	if (x >= ofGetWindowWidth() - width)
+	{
+		speedX *= -1;
+	}
+	if (x <= theHero->x + theHero->width)
+	{
+		speedX = 0;
+		clawReleaced = false;
+	}
 	
 }
 

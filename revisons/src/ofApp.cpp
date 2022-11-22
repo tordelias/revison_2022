@@ -5,11 +5,16 @@
 #include "Claw.h"
 
 GameManager::STATUS GameManager::gameMode = GameManager::Start_SCREEN;
-
+//bool ailienDead = false;
 
 shared_ptr<Hero> superHero;
 shared_ptr<Ailien> ailien;
 shared_ptr<Claw> claw;
+
+float distanceX;
+float distanceY;
+float totalWidth;
+float totalHeight;
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -25,26 +30,39 @@ void ofApp::setup() {
 	float ailienPosX = ofGetWindowWidth() - ailienWidth;
 	float ailienPosY = (ofGetWindowHeight() - ailienHeight) / 2;
 	ofColor ailienColor = ofColor::magenta;
-
-	float clawHeight = heroHeight / 4;
+	
+	float clawHeight = heroHeight / 100;
 	float clawWidth = 50;
 
 
 	superHero = make_shared<Hero>(heroPositonX, heroPositonY, heroWidth, heroHeight, heroColor);
 	ailien = make_shared<Ailien>(ailienPosX, ailienPosY, ailienWidth, ailienHeight,ailienColor);
 	claw = make_shared<Claw>( clawWidth, clawHeight,superHero);
+	ailien->claw = claw;
 
-	
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
 	if (GameManager::gameMode == GameManager::RUN)
 	{
+		//distanceX = abs((claw->x + claw->width) - (ailien->x + ailien->width));
+		//distanceY = abs((claw->y + claw->height) - (ailien->y + ailien->height));
+		//totalWidth = claw->width + ailien->width;
+		//totalHeight = claw->height + ailien->height;
+
 		superHero->Update();
 		ailien->Move();
 		claw->Move();
-		
+		//if (distanceX <= totalWidth && distanceY <= totalHeight)
+		//{
+		//	ailienDead = true;
+		//}
+		//if (claw->clawReleaced == false)
+		//{
+		//	ailienDead = false;
+		//}
 	}
 
 }
@@ -56,6 +74,10 @@ void ofApp::draw() {
 	superHero->Draw();
 	ailien->Draw();
 	claw->Draw();
+	//if (ailienDead == false)
+	//{
+	//	ailien->Draw();
+	//}
 }
 
 //--------------------------------------------------------------
@@ -84,6 +106,11 @@ void ofApp::keyReleased(int key) {
 	if (key == 'd')
 	{
 		GameManager::gameMode = GameManager::Start_SCREEN;
+	}
+	if (key == 'g')
+	{
+		claw->clawReleaced = true;
+		claw->speedX = 3;
 	}
 }
 

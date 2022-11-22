@@ -1,5 +1,7 @@
 #include "Ailien.h"
 #include "ofApp.h"
+#include "GameManager.h"
+#include "Claw.h"
 
 Ailien::Ailien(int in_x, int in_y, float in_Width, float in_Height, ofColor in_Color)
 {
@@ -18,11 +20,33 @@ void Ailien::Draw()
 
 void Ailien::Move()
 {
-	y = y + speedY * ofGetLastFrameTime() * 50;
-	if (y <= 0 or y >= ofGetWindowHeight() - height)
+	if (gotCaught == false)
 	{
-		speedY = speedY;
-		speedY *= -1;
+		y = y + speedY * ofGetLastFrameTime() * 50;
+		if (y <= 0 or y >= ofGetWindowHeight() - height)
+		{
+			speedY = speedY;
+			speedY *= -1;
+		}
+		if (GameManager::CheckTwoRectangleCollide(
+			x, y, width, height, claw->x, claw->y, claw->width, claw->height) == true)
+		{
+			gotCaught = true;
+			claw->speedX = -1 * abs(claw->speedX);
+			speedY = 0;
+
+		}
+	}
+	else
+	{
+		x = claw->x + claw->width;
+		y = (claw->y + claw->height / 2) - height / 2;
+		if (claw->clawReleaced == false)
+		{
+			x = ofGetWindowWidth() - width;
+			gotCaught = false;
+			speedY = 3;
+		}
 	}
 
 }

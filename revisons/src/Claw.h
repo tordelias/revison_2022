@@ -13,7 +13,9 @@ public:
 	float width{ 0 };
 	float height{ 0 };
 	float speedY{ 0 };
+	float speedX{ 0 };
 	ofColor color{ 0 };
+	bool clawReleaced{ false };
 
 	shared_ptr<Hero> theHero;
 
