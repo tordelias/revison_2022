@@ -2,21 +2,18 @@
 #include "Hero.h"
 #include "GameManager.h"
 #include "Ailien.h"
+#include "Claw.h"
 
 GameManager::STATUS GameManager::gameMode = GameManager::Start_SCREEN;
 
-//float x = 250;
-//float y = 50;
-//float size1 = 50;
-//int ammount = 5;
 
 shared_ptr<Hero> superHero;
 shared_ptr<Ailien> ailien;
+shared_ptr<Claw> claw;
 
 //--------------------------------------------------------------
 void ofApp::setup() {
-	ofSetFrameRate(60);
-	//ofSetRectMode(OF_RECTMODE_CENTER);
+	ofSetFrameRate(30);
 	float heroWidth = 50;
 	float heroHeight = 100;
 	float heroPositonX = 0;
@@ -29,8 +26,15 @@ void ofApp::setup() {
 	float ailienPosY = (ofGetWindowHeight() - ailienHeight) / 2;
 	ofColor ailienColor = ofColor::magenta;
 
+	float clawHeight = heroHeight / 4;
+	float clawWidth = 50;
+
+
 	superHero = make_shared<Hero>(heroPositonX, heroPositonY, heroWidth, heroHeight, heroColor);
 	ailien = make_shared<Ailien>(ailienPosX, ailienPosY, ailienWidth, ailienHeight,ailienColor);
+	claw = make_shared<Claw>( clawWidth, clawHeight,superHero);
+
+	
 }
 
 //--------------------------------------------------------------
@@ -39,6 +43,8 @@ void ofApp::update() {
 	{
 		superHero->Update();
 		ailien->Move();
+		claw->Move();
+		
 	}
 
 }
@@ -47,24 +53,9 @@ void ofApp::update() {
 void ofApp::draw() {
 	
 	GameManager::DisplayOnScreenMesseger();
-	//if (GameManager::gameMode == GameManager::RUN)
-	//{
-
-	////for (int i = 0; i <= ammount; i++)
-	////{
-	////	ofNoFill();
-	////	ofDrawRectangle(x, y, size1, size1);
-	////	x = x + size1 / 2 + size1 * 1.25 / 2;
-	////	size1 *= 1.25;
-	////	if (i == ammount)
-	////	{
-	////		size1 = 10;
-	////		x = 250;
-	////	}
-	////}
-	//}
 	superHero->Draw();
 	ailien->Draw();
+	claw->Draw();
 }
 
 //--------------------------------------------------------------
