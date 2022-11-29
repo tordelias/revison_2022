@@ -16,7 +16,8 @@ void GameManager::DisplayOnScreenMesseger()
 	else if (GameManager::gameMode == GameManager::END_GAME)
 	{
 		ofSetColor(255, 255, 255);
-		ofDrawBitmapString("You Lose", 250, 250);
+		ofDrawBitmapString("Fire crashed on Hero", 250, 250);
+		ofDrawBitmapString("Press f to restart", 250, 300);
 	}
 	else if (GameManager::gameMode == GameManager::VICTORY)
 	{

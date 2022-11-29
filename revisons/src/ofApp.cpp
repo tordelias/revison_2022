@@ -3,12 +3,14 @@
 #include "GameManager.h"
 #include "Ailien.h"
 #include "Claw.h"
+#include "FireBall.h"
 
 GameManager::STATUS GameManager::gameMode = GameManager::Start_SCREEN;
 
 shared_ptr<Hero> superHero;
 shared_ptr<Ailien> ailien;
 shared_ptr<Claw> claw;
+shared_ptr<FireBall> fireBall;
 
 float distanceX;
 float distanceY;
@@ -35,11 +37,17 @@ void ofApp::setup() {
 	float clawHeight = 30;
 	float clawWidth = 50;
 
+	float fireBallHeight = 50;
+	float fireBallWidth = 150;
+
 
 	superHero = make_shared<Hero>(heroPositonX, heroPositonY, heroWidth, heroHeight, heroColor);
 	ailien = make_shared<Ailien>(ailienPosX, ailienPosY, ailienWidth, ailienHeight,ailienColor);
 	claw = make_shared<Claw>( clawWidth, clawHeight,superHero);
+	fireBall = make_shared<FireBall>(fireBallWidth, fireBallHeight);
+
 	ailien->claw = claw;
+	fireBall->superHero = superHero;
 
 	GameManager::gameMode = GameManager::Start_SCREEN;
 }
@@ -52,6 +60,7 @@ void ofApp::update() {
 		superHero->Update();
 		ailien->Move();
 		claw->Move();
+		fireBall->Move();
 	}
 
 }
@@ -63,6 +72,7 @@ void ofApp::draw() {
 	superHero->Draw();
 	ailien->Draw();
 	claw->Draw();
+	fireBall->Draw();
 	GameManager::DisplayOnScreenMesseger();
 	//ofSetBackgroundColor(178, 190, 181);
 
@@ -88,7 +98,7 @@ void ofApp::keyReleased(int key) {
 	//{
 	//	GameManager::gameMode = GameManager::END_GAME;
 	//}
-	if (key == 'f')
+	if (key == 'f' && GameManager::Start_SCREEN || GameManager::END_GAME)
 	{
 		GameManager::gameMode = GameManager::RUN;
 		
