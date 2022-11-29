@@ -17,6 +17,7 @@ float distanceY;
 float totalWidth;
 float totalHeight;
 
+ofImage background;
 
 
 //--------------------------------------------------------------
@@ -49,6 +50,13 @@ void ofApp::setup() {
 	ailien->claw = claw;
 	fireBall->superHero = superHero;
 
+	background.loadImage("Space_Background_0.png");
+	fireBall->Setup();
+	superHero->Setup();
+	ailien->Setup();
+	claw->Setup();
+
+
 	GameManager::gameMode = GameManager::Start_SCREEN;
 }
 
@@ -68,7 +76,8 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw() {
 	ofSetColor(178, 190, 181);
-	ofDrawRectangle(0, 0, 1024, 768);
+	/*ofDrawRectangle(0, 0, 1024, 768);*/
+	background.draw(0, 0, 1024, 768);
 	superHero->Draw();
 	ailien->Draw();
 	claw->Draw();

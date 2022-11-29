@@ -16,12 +16,14 @@ public:
 	float speedX{ 0 };
 	ofColor color{ 0 };
 	bool clawReleaced{ false };
+	ofImage claw1;
 
 	shared_ptr<Hero> theHero;
 
 	Claw(float in_Width, float in_Height, shared_ptr<Hero> inHero);
 	void Draw();
 	void Move();
+	void Setup();
 
 };
 

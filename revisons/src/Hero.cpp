@@ -12,7 +12,8 @@ Hero::Hero(int in_x, int in_y, float in_Width, float in_Height, ofColor in_Color
 void Hero::Draw()
 {
 	ofSetColor(color);
-	ofDrawRectangle(x, y, width, height);
+	//ofDrawRectangle(x, y, width, height);
+	hero1.draw(x, y, width, height);
 }
 
 void Hero::Update()
@@ -27,4 +28,8 @@ void Hero::Update()
 	{
 		y = ofGetWindowHeight() - height;
 	}
+}
+void Hero::Setup()
+{
+	hero1.loadImage("hero.png");
 }

@@ -2,6 +2,7 @@
 #include "GameManager.h"
 #include "Hero.h"
 
+
 FireBall::FireBall(float in_Width, float in_Height)
 {
 	width = in_Width;
@@ -10,12 +11,25 @@ FireBall::FireBall(float in_Width, float in_Height)
 	y = ofRandom(0, ofGetWindowHeight() - height / 2);
 	x = ofGetWindowWidth() - width;
 	speedX = 3;
+	
+}
+void FireBall::Setup()
+{
+	fireball1.loadImage("fireball.png");
 }
 
 void FireBall::Draw()
 {
 	ofSetColor(color);
-	ofDrawRectangle(x, y, width, height);
+	/*ofDrawRectangle(x, y, width, height);*/
+	if(speedX > 0)
+	{
+		fireball1.draw(x, y, width, height);
+	}
+	if (speedX < 0)
+	{
+		fireball1.draw(x + width, y, -width, height);
+	}
 }
 
 void FireBall::Move()
@@ -41,3 +55,4 @@ void FireBall::Move()
 		x = ofGetWindowWidth() - width;
 	}
 }
+

@@ -11,7 +11,8 @@ public:
 	float speedX{ 0 };
 	ofColor color{ 0 };
 	shared_ptr<Hero> superHero;
-
+	ofImage fireball1;
+	void Setup();
 	FireBall(float in_Width, float in_Height);
 	void Draw();
 	void Move();

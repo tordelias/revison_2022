@@ -35,7 +35,12 @@ void Claw::Move()
 void Claw::Draw()
 {
 	ofSetColor(color);
-	ofDrawRectangle(x, y, width, height);
+	//ofDrawRectangle(x, y, width, height);
+	claw1.draw(x, y, width, height);
+}
+void Claw::Setup()
+{
+	claw1.loadImage("claw.png");
 }
 
 

@@ -11,6 +11,7 @@ public:
 	float height{ 0 };
 	float speedY{ 0 };
 	ofColor color{ 0 };
+	ofImage ailian1;
 
 	bool gotCaught{ false };
 	shared_ptr<Claw> claw;
@@ -18,6 +19,7 @@ public:
 	Ailien(int in_x, int in_y, float in_Width, float in_Height, ofColor in_Color);
 	void Draw();
 	void Move();
+	void Setup();
 };
 
 

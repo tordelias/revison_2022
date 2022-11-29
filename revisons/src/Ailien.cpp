@@ -15,7 +15,15 @@ Ailien::Ailien(int in_x, int in_y, float in_Width, float in_Height, ofColor in_C
 void Ailien::Draw()
 {
 	ofSetColor(color);
-	ofDrawRectangle(x, y, width, height);
+	/*ofDrawRectangle(x, y, width, height);*/
+	if (speedY <= 0)
+	{
+		ailian1.draw(x, y, width, height);
+	}
+	if (speedY >= 0)
+	{
+		ailian1.draw(x, y + height, width, -height);
+	}
 }
 
 void Ailien::Move()
@@ -51,4 +59,8 @@ void Ailien::Move()
 		}
 	}
 
+}
+void Ailien::Setup() 
+{
+	ailian1.loadImage("ailian.png");
 }
