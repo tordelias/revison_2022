@@ -64,7 +64,7 @@ void ofApp::setup() {
 void ofApp::update() {
 	if (GameManager::gameMode == GameManager::RUN)
 	{
-
+		ailien->framNumber += 1;
 		superHero->Update();
 		ailien->Move();
 		claw->Move();

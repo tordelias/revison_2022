@@ -30,17 +30,63 @@ void Claw::Move()
 		clawReleaced = false;
 	}
 	
+	if (frameNumber < 5)
+	{
+		claw1 = animation[0];
+	}
+	else if (frameNumber < 10)
+	{
+		claw1 = animation[1];
+	}
+	else if (frameNumber < 15)
+	{
+		claw1 = animation[2];
+	}
+	else if (frameNumber < 20)
+	{
+		claw1 = animation[3];
+	}
+	else if (frameNumber < 25)
+	{
+		claw1 = animation[4];
+	}
+	else if (frameNumber < 30)
+	{
+		claw1 = animation[5];
+	}
+	else if (frameNumber < 35)
+	{
+		claw1 = animation[6];
+	}
+	else if (frameNumber < 40)
+	{
+		claw1 = animation[7];
+		frameNumber = 0;
+	}
+	frameNumber++;
 }
 
 void Claw::Draw()
 {
 	ofSetColor(color);
 	//ofDrawRectangle(x, y, width, height);
-	claw1.draw(x, y, width, height);
+	if(clawReleaced == true && speedX > 0)
+	{
+		claw1.draw(x, y, width, height);
+	}
+	else
+	{
+		animation[1].draw(x, y, width, height);
+	}
+	//claw1.draw(x, y, width, height);
 }
 void Claw::Setup()
 {
-	claw1.loadImage("claw.png");
+	/*claw1.loadImage("claw.png");*/
+	for (int i = 0; i < 8; i++)
+	{
+		animation[i].load("Part-4_Sprite_Images/Claw/claw" + to_string(i) + ".png");
+	}
 }
 
 

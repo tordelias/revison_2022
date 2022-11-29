@@ -13,6 +13,8 @@ public:
 	float speedX{ 0 };
 	ofColor color{ 0 };
 	ofImage hero1;
+	ofImage animation[10];
+	int frameNumber{ 0 };
 	Hero(int in_x, int in_y, float in_Width, float in_Height, ofColor in_Color);
 	void Draw();
 	void Update();

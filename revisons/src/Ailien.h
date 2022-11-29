@@ -11,7 +11,9 @@ public:
 	float height{ 0 };
 	float speedY{ 0 };
 	ofColor color{ 0 };
-	ofImage ailian1;
+	int framNumber { 0 };
+	ofImage alianImage;
+	ofImage animation[5];
 
 	bool gotCaught{ false };
 	shared_ptr<Claw> claw;

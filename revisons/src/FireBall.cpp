@@ -15,7 +15,11 @@ FireBall::FireBall(float in_Width, float in_Height)
 }
 void FireBall::Setup()
 {
-	fireball1.loadImage("fireball.png");
+	/*fireball1.loadImage("fireball.png");*/
+	for (int i = 0; i < 6; i++)
+	{
+		animation[i].load("Part-4_Sprite_Images/fireball/tile0" + to_string(i) + ".png");
+	}
 }
 
 void FireBall::Draw()
@@ -54,5 +58,31 @@ void FireBall::Move()
 		y = ofRandom(0, ofGetWindowHeight() - height / 2);
 		x = ofGetWindowWidth() - width;
 	}
+	if (frameNumber < 5)
+	{
+		fireball1 = animation[0];
+	}
+	else if (frameNumber < 10)
+	{
+		fireball1 = animation[1];
+	}
+	else if (frameNumber < 15)
+	{
+		fireball1 = animation[2];
+	}
+	else if (frameNumber < 20)
+	{
+		fireball1 = animation[3];
+	}
+	else if (frameNumber < 25)
+	{
+		fireball1 = animation[4];
+	}
+	else if (frameNumber < 30)
+	{
+		fireball1 = animation[5];
+		frameNumber = 0;
+	}
+	frameNumber++;
 }
 

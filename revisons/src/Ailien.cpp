@@ -3,6 +3,7 @@
 #include "GameManager.h"
 #include "Claw.h"
 
+
 Ailien::Ailien(int in_x, int in_y, float in_Width, float in_Height, ofColor in_Color)
 {
 	x = in_x;
@@ -14,15 +15,15 @@ Ailien::Ailien(int in_x, int in_y, float in_Width, float in_Height, ofColor in_C
 }
 void Ailien::Draw()
 {
-	ofSetColor(color);
+	//ofSetColor(color);
 	/*ofDrawRectangle(x, y, width, height);*/
 	if (speedY <= 0)
 	{
-		ailian1.draw(x, y, width, height);
+		alianImage.draw(x, y, width, height);
 	}
 	if (speedY >= 0)
 	{
-		ailian1.draw(x, y + height, width, -height);
+		alianImage.draw(x, y + height, width, -height);
 	}
 }
 
@@ -30,6 +31,7 @@ void Ailien::Move()
 {
 	if (gotCaught == false)
 	{
+	
 		y = y + speedY * ofGetLastFrameTime() * 50;
 		if (y <= 0 or y >= ofGetWindowHeight() - height)
 		{
@@ -44,6 +46,7 @@ void Ailien::Move()
 			speedY = 0;
 
 		}
+
 	}
 	else
 	{
@@ -57,10 +60,37 @@ void Ailien::Move()
 			//gotCaught = false;
 			//speedY = 3;
 		}
-	}
 
+	
+	}
+	if (framNumber < 10)
+	{
+		alianImage = animation[0];
+	}
+	else if (framNumber < 20)
+	{
+		alianImage = animation[1];
+	}
+	else if (framNumber < 30)
+	{
+		alianImage = animation[2];
+	}
+	else if (framNumber < 40)
+	{
+		alianImage = animation[3];
+	}
+	else if (framNumber < 50)
+	{
+		alianImage = animation[4];
+		framNumber = 0;
+	}
+	/*framNumber++;*/
 }
 void Ailien::Setup() 
 {
-	ailian1.loadImage("ailian.png");
+
+	for (int i = 0; i < 5; i++)
+	{
+		animation[i].load("Alien_Spaceship/ailian" + to_string(i) + ".png");
+	}
 }

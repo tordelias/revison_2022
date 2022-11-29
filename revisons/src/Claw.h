@@ -16,7 +16,9 @@ public:
 	float speedX{ 0 };
 	ofColor color{ 0 };
 	bool clawReleaced{ false };
+	int frameNumber{ 0 };
 	ofImage claw1;
+	ofImage animation[8];
 
 	shared_ptr<Hero> theHero;
 
