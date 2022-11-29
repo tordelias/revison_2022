@@ -7,12 +7,21 @@ void GameManager::DisplayOnScreenMesseger()
 {
 	if (GameManager::gameMode == GameManager::Start_SCREEN)
 	{
-		ofDrawBitmapString("Welcome to my game", 250, 250);
+		ofSetColor(255,255, 255);
+		ofDrawBitmapString("Welcome to hero encounter Alien", 250, 250);
+		ofDrawBitmapString("Press f to start", 250, 300);
+		ofDrawBitmapString("Press g to shoot grabber", 250, 350);
 	}
 
 	else if (GameManager::gameMode == GameManager::END_GAME)
 	{
+		ofSetColor(255, 255, 255);
 		ofDrawBitmapString("You Lose", 250, 250);
+	}
+	else if (GameManager::gameMode == GameManager::VICTORY)
+	{
+		ofSetColor(255, 255, 255);
+		ofDrawBitmapString("Well Done! Game End!", 250, 250);
 	}
 }
 

@@ -5,7 +5,6 @@
 #include "Claw.h"
 
 GameManager::STATUS GameManager::gameMode = GameManager::Start_SCREEN;
-//bool ailienDead = false;
 
 shared_ptr<Hero> superHero;
 shared_ptr<Ailien> ailien;
@@ -16,22 +15,24 @@ float distanceY;
 float totalWidth;
 float totalHeight;
 
+
+
 //--------------------------------------------------------------
 void ofApp::setup() {
 	ofSetFrameRate(30);
-	float heroWidth = 50;
-	float heroHeight = 100;
+	float heroWidth = 120;
+	float heroHeight = 150;
 	float heroPositonX = 0;
 	float heroPositonY = (ofGetWindowHeight() - heroHeight) / 2;
-	ofColor heroColor = ofColor::cyan;
+	ofColor heroColor = ofColor::white;
 
-	float ailienWidth = 75;
-	float ailienHeight = 150;
+	float ailienWidth = 110;
+	float ailienHeight = 85;
 	float ailienPosX = ofGetWindowWidth() - ailienWidth;
 	float ailienPosY = (ofGetWindowHeight() - ailienHeight) / 2;
-	ofColor ailienColor = ofColor::magenta;
+	ofColor ailienColor = ofColor::blue;
 	
-	float clawHeight = heroHeight / 100;
+	float clawHeight = 30;
 	float clawWidth = 50;
 
 
@@ -40,53 +41,41 @@ void ofApp::setup() {
 	claw = make_shared<Claw>( clawWidth, clawHeight,superHero);
 	ailien->claw = claw;
 
-
+	GameManager::gameMode = GameManager::Start_SCREEN;
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
 	if (GameManager::gameMode == GameManager::RUN)
 	{
-		//distanceX = abs((claw->x + claw->width) - (ailien->x + ailien->width));
-		//distanceY = abs((claw->y + claw->height) - (ailien->y + ailien->height));
-		//totalWidth = claw->width + ailien->width;
-		//totalHeight = claw->height + ailien->height;
 
 		superHero->Update();
 		ailien->Move();
 		claw->Move();
-		//if (distanceX <= totalWidth && distanceY <= totalHeight)
-		//{
-		//	ailienDead = true;
-		//}
-		//if (claw->clawReleaced == false)
-		//{
-		//	ailienDead = false;
-		//}
 	}
 
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-	
-	GameManager::DisplayOnScreenMesseger();
+	ofSetColor(178, 190, 181);
+	ofDrawRectangle(0, 0, 1024, 768);
 	superHero->Draw();
 	ailien->Draw();
 	claw->Draw();
-	//if (ailienDead == false)
-	//{
-	//	ailien->Draw();
-	//}
+	GameManager::DisplayOnScreenMesseger();
+	//ofSetBackgroundColor(178, 190, 181);
+
+	
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-	if (key == OF_KEY_UP)
+	if (key == OF_KEY_UP or key == 'w')
 	{
 		superHero->speedY = -3;
 	}
-	else if (key == OF_KEY_DOWN)
+	else if (key == OF_KEY_DOWN || key == 's')
 	{
 		superHero->speedY = 3;
 	}
@@ -95,18 +84,19 @@ void ofApp::keyPressed(int key) {
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
-	if (key == 's')
-	{
-		GameManager::gameMode = GameManager::END_GAME;
-	}
-	if (key == 'a')
+	//if (key == 's')
+	//{
+	//	GameManager::gameMode = GameManager::END_GAME;
+	//}
+	if (key == 'f')
 	{
 		GameManager::gameMode = GameManager::RUN;
+		
 	}
-	if (key == 'd')
-	{
-		GameManager::gameMode = GameManager::Start_SCREEN;
-	}
+	//if (key == 'd')
+	//{
+	//	GameManager::gameMode = GameManager::Start_SCREEN;
+	//}
 	if (key == 'g')
 	{
 		claw->clawReleaced = true;

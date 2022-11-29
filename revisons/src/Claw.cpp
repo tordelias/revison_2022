@@ -5,7 +5,7 @@ Claw::Claw(float in_Width, float in_Height, shared_ptr<Hero> inHero)
 {
 width = in_Width;
 height = in_Height;
-color = ofColor::yellow;
+color = ofColor::darkMagenta;
 theHero = inHero;
 
 x = theHero->x + theHero->width;

@@ -41,11 +41,13 @@ void Ailien::Move()
 	{
 		x = claw->x + claw->width;
 		y = (claw->y + claw->height / 2) - height / 2;
+		
 		if (claw->clawReleaced == false)
 		{
-			x = ofGetWindowWidth() - width;
-			gotCaught = false;
-			speedY = 3;
+			GameManager::gameMode = GameManager::VICTORY;
+			//x = ofGetWindowWidth() - width;
+			//gotCaught = false;
+			//speedY = 3;
 		}
 	}
 
