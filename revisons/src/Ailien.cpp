@@ -17,7 +17,7 @@ void Ailien::Draw()
 {
 	//ofSetColor(color);
 	/*ofDrawRectangle(x, y, width, height);*/
-	if (speedY <= 0)
+	if (speedY < 0)
 	{
 		alianImage.draw(x, y, width, height);
 	}
@@ -55,10 +55,11 @@ void Ailien::Move()
 		
 		if (claw->clawReleaced == false)
 		{
-			GameManager::gameMode = GameManager::VICTORY;
-			//x = ofGetWindowWidth() - width;
-			//gotCaught = false;
-			//speedY = 3;
+			//GameManager::gameMode = GameManager::VICTORY;
+			x = ofGetWindowWidth() - width;
+			gotCaught = false;
+			speedY = 3;
+			ailianScore++;
 		}
 
 	

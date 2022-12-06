@@ -19,9 +19,26 @@ float totalHeight;
 
 ofImage background;
 
+// countDown
+float countdownGiven;
+float countdownToCalculate;
+float countdownToDisplay;
+float StartTime;
+std::ostringstream countdownStream;
+bool startTimer = false;
+
+int score = 0;
+
 
 //--------------------------------------------------------------
 void ofApp::setup() {
+	//CountDown
+	StartTime = ofGetElapsedTimef();
+	countdownGiven = 30;
+	countdownToCalculate = countdownGiven;
+	countdownStream << fixed << setprecision(2);
+
+
 	ofSetFrameRate(30);
 	float heroWidth = 120;
 	float heroHeight = 150;
@@ -69,7 +86,33 @@ void ofApp::update() {
 		ailien->Move();
 		claw->Move();
 		fireBall->Move();
+
+		//countDown
+		
+		float timerCounted = ofGetElapsedTimef() - StartTime;
+		countdownToDisplay = countdownToCalculate - timerCounted;
+		if (countdownToDisplay <= 0)
+		{
+			countdownToDisplay = 0;
+		}
+		countdownStream.str("0:00");
+		countdownStream << countdownToDisplay;
+		if (countdownToDisplay == 0 and score > 0)
+		{
+			GameManager::gameMode = GameManager::VICTORY;
+		}
+		else if (countdownToDisplay == 0)
+		{
+			GameManager::gameMode = GameManager::END_GAME;
+		}
+		score = ailien->ailianScore;
 	}
+	//if (startTimer)
+	//{
+	//	//countdownGiven = 30;
+	//	StartTime = ofGetElapsedTimef();
+	//	startTimer = false;
+	//}
 
 }
 
@@ -84,7 +127,13 @@ void ofApp::draw() {
 	fireBall->Draw();
 	GameManager::DisplayOnScreenMesseger();
 	//ofSetBackgroundColor(178, 190, 181);
-
+	ofSetColor(120, 255, 100);
+	ofDrawBitmapString(countdownStream.str() + "sec remaining...", 350, 50);
+	ofDrawBitmapString("Score: " + to_string(score), 150, 50);
+	if (GameManager::gameMode == GameManager::VICTORY)
+	{
+		ofDrawBitmapString("final score is " + to_string(score), 250, 300);
+	}
 	
 }
 
@@ -110,6 +159,7 @@ void ofApp::keyReleased(int key) {
 	if (key == 'f' && GameManager::Start_SCREEN || GameManager::END_GAME)
 	{
 		GameManager::gameMode = GameManager::RUN;
+		startTimer = true;
 		
 	}
 	//if (key == 'd')
@@ -167,3 +217,12 @@ void ofApp::gotMessage(ofMessage msg) {
 void ofApp::dragEvent(ofDragInfo dragInfo) {
 
 }
+
+//void Reset()
+//{
+//	if(startTimer)
+//	{
+//		countdownToCalculate = countdownGiven - 2;
+//		ofResetElapsedTimeCounter();
+//	}
+//}

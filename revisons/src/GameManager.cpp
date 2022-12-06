@@ -23,6 +23,7 @@ void GameManager::DisplayOnScreenMesseger()
 	{
 		ofSetColor(255, 255, 255);
 		ofDrawBitmapString("Well Done! Game End!", 250, 250);
+
 	}
 }
 

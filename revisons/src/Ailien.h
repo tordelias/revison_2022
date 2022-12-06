@@ -17,6 +17,7 @@ public:
 
 	bool gotCaught{ false };
 	shared_ptr<Claw> claw;
+	int ailianScore{ 0 };
 
 	Ailien(int in_x, int in_y, float in_Width, float in_Height, ofColor in_Color);
 	void Draw();
